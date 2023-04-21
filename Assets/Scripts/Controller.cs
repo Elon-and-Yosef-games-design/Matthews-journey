@@ -1,26 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Controller : MonoBehaviour
 {
-    [SerializeField] float speed = 10.0f;
-    private CharacterController controller;
-    private Vector3 velocity;
+    [SerializeField] float JumpImpulse = 7f;
+    [SerializeField] float SideSpeed = 2f;
+
+    [SerializeField] InputAction move_right;
+    [SerializeField] InputAction move_left;
+    [SerializeField] InputAction jump;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public ContactFilter2D ContactFilter;
+
+    private Rigidbody2D m_Rigidbody;
+    private bool m_ShouldJump;
+    private float m_SideSpeed;
+
+    // We can check to see if there are any contacts given our contact filter
+    // which can be set to a specific layer and normal angle.
+    public bool IsGrounded => m_Rigidbody.IsTouching(ContactFilter);
+
+    private void OnEnable()
     {
-        controller = GetComponent<CharacterController>();
-        velocity = new Vector3(0, 0, 0);
+        move_left.Enable();
+        move_right.Enable();    
+        jump.Enable();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
-        if (!controller.enabled) return;
-        velocity.x = speed * Input.GetAxis("Horizontal");
-        controller.Move(velocity * Time.deltaTime);
+        // Set jump/
+        if (jump.IsPressed())
+            m_ShouldJump = true;
+
+        // Set movement.
+        m_SideSpeed = (move_left.IsPressed() ? -SideSpeed : 0f) + (move_right.IsPressed() ? SideSpeed : 0f);
+    }
+
+    void FixedUpdate()
+    {
+        // Handle jump.
+        // NOTE: If instructed to jump, we'll check if we're grounded.
+        if (m_ShouldJump && IsGrounded)
+            m_Rigidbody.AddForce(Vector2.up * JumpImpulse, ForceMode2D.Impulse);
+
+        // Set sideways velocity.
+        m_Rigidbody.velocity = new Vector2(m_SideSpeed, m_Rigidbody.velocity.y);
+
+        // Reset movement.
+        m_ShouldJump = false;
+        m_SideSpeed = 0f;
+    }
+    public void set_speed(float speed)
+    {
+        this.SideSpeed = speed;
     }
 }
