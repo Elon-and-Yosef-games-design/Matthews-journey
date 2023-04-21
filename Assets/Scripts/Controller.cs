@@ -64,4 +64,8 @@ public class Controller : MonoBehaviour
     {
         this.SideSpeed = speed;
     }
+    public float get_speed()
+    {
+        return this.SideSpeed;
+    }
 }

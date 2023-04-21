@@ -5,6 +5,7 @@ using UnityEngine;
 public class life_system : MonoBehaviour
 {
     [SerializeField] int life_points = 100;
+    [SerializeField] GameObject screen_manager;
 
     public int Get_life_points()
     {
@@ -24,6 +25,10 @@ public class life_system : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(life_points <= 0)
+        {
+            screen_manager.GetComponent<Screen_manager>().load_lose_screen();
+        }
         
     }
 }
