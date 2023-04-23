@@ -152,6 +152,7 @@ public class Controller : MonoBehaviour
             {
                 transform.position = startingPosition;
             }
+            return;
         }
     }
 }
