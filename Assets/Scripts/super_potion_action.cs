@@ -15,13 +15,13 @@ public class super_potion_action : MonoBehaviour
             collision.transform.GetComponent<Player_damage_system>().shilded(duration);
             float og_impulse = collision.transform.GetComponent<Controller>().get_impulse();
             StartCoroutine(enumerator(og_impulse, collision.transform));
-         
+
         }
     }
 
     IEnumerator enumerator(float og_impulse, Transform t)
     {
-        t.GetComponent<Controller>().set_impulse(og_impulse*multiplier);
+        t.GetComponent<Controller>().set_impulse(og_impulse * multiplier);
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(duration);
         t.GetComponent<Controller>().set_impulse(og_impulse);

@@ -21,6 +21,6 @@ public class life_potion_action : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

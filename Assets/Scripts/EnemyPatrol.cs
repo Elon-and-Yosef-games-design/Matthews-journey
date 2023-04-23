@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
-{   
+{
     [SerializeField]
     public float speed = 2f;
     [SerializeField]
@@ -35,7 +35,7 @@ public class EnemyPatrol : MonoBehaviour
         else if (Mathf.Abs(transform.position.x - endPoint) < epsilon && moveRight)
         {
             moveRight = false;
-            targetPosition = new Vector3(transform.position.x +  startPoint, transform.position.y, transform.position.z);
+            targetPosition = new Vector3(transform.position.x + startPoint, transform.position.y, transform.position.z);
         }
     }
 }
