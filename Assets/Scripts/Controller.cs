@@ -13,6 +13,8 @@ public class Controller : MonoBehaviour
     [SerializeField] InputAction move_left;
     [SerializeField] InputAction jump;
 
+    [SerializeField] private Vector3 startingPosition;
+
 
     public ContactFilter2D ContactFilter;
 
@@ -34,6 +36,7 @@ public class Controller : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        startingPosition = transform.position;
     }
 
     void Update()
@@ -67,5 +70,24 @@ public class Controller : MonoBehaviour
     public float get_speed()
     {
         return this.SideSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("enemy"))
+        {
+            Vector2 collisionNormal = collision.GetContact(0).normal;
+            float angle = Vector2.Angle(collisionNormal, Vector2.up);
+
+            if (angle < 45f) // Falling on the enemy
+            {
+                Destroy(collision.gameObject);
+            }
+            else // Touching the enemy on the x-axis
+            {
+                transform.position = startingPosition;
+            }
+        }
     }
 }

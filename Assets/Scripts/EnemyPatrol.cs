@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class EnemyPatrol : MonoBehaviour
+{
+    public float speed = 2f;
+    public float startPoint = 0f;
+    public float endPoint = 10f;
+
+    private Vector3 targetPosition;
+    private bool moveRight = true;
+    private float epsilon = 0.1f;
+
+    void Start()
+    {
+        targetPosition = new Vector3(startPoint, transform.position.y, transform.position.z);
+    }
+
+    void Update()
+    {
+        Patrol();
+    }
+
+    private void Patrol()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        if (Mathf.Abs(transform.position.x - startPoint) < epsilon && !moveRight)
+        {
+            moveRight = true;
+            targetPosition = new Vector3(endPoint, transform.position.y, transform.position.z);
+        }
+        else if (Mathf.Abs(transform.position.x - endPoint) < epsilon && moveRight)
+        {
+            moveRight = false;
+            targetPosition = new Vector3(startPoint, transform.position.y, transform.position.z);
+        }
+    }
+}
