@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         move_left.Enable();
-        move_right.Enable();    
+        move_right.Enable();
         jump.Enable();
     }
 
@@ -95,7 +95,7 @@ public class Controller : MonoBehaviour
                 isSliding = false;
             }
         }
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -141,7 +141,7 @@ public class Controller : MonoBehaviour
         return this.JumpImpulse;
     }
 
-    
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {

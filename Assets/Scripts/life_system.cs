@@ -13,7 +13,7 @@ public class life_system : MonoBehaviour
     {
         return life_points;
     }
-    
+
     public void Reduce_life_points(int points)
     {
         life_points -= points;
@@ -35,11 +35,11 @@ public class life_system : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(life_points <= 0)
+        if (life_points <= 0)
         {
             transform.position = startingPosition;
             Debug.Log("die");
         }
-        
+
     }
 }

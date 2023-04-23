@@ -9,7 +9,7 @@ public class Player_damage_system : MonoBehaviour
     [SerializeField] float reduced_speed = 3.0f;
     [SerializeField] float duration_fall_damage = 1.0f;
     [SerializeField] bool shiled_flag = false;
-    
+
     void onFall()
     {
         Debug.Log("damaged");
@@ -55,6 +55,6 @@ public class Player_damage_system : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
