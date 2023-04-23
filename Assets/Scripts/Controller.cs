@@ -68,4 +68,17 @@ public class Controller : MonoBehaviour
     {
         return this.SideSpeed;
     }
+    /**
+     * set new impulse
+     */
+    public void set_impulse(float im)
+    {
+        this.JumpImpulse = im;
+    }
+    public float get_impulse()
+    {
+        return this.JumpImpulse;
+    }
+
+    
 }

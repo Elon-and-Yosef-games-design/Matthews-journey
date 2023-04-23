@@ -16,6 +16,10 @@ public class life_system : MonoBehaviour
     {
         life_points -= points;
     }
+    public void Increase_life_points(int points)
+    {
+        life_points += points;
+    }
     // Start is called before the first frame update
     void Start()
     {
