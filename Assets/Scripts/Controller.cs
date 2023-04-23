@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private Vector3 startingPosition;
     public float minimumImpulseForce = 5f;
 
+    [SerializeField] GameObject scean_manager;
     public float slidingSpeed = 2f;
     private bool isSliding = false;
     private Rigidbody2D heroRigidbody;
@@ -163,9 +164,15 @@ public class Controller : MonoBehaviour
             }
             else // Touching the enemy on the x-axis
             {
-                transform.position = startingPosition;
+                //transform.position = startingPosition;
+                GetComponent<life_system>().Reduce_life_points(10);
             }
             return;
         }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            scean_manager.GetComponent<Screen_manager>().load_win_screen();
+        }
+
     }
 }
