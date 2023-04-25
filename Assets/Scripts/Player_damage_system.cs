@@ -8,9 +8,11 @@ public class Player_damage_system : MonoBehaviour
     [SerializeField] float minImpulseForfallDamage = 1.0f;
     [SerializeField] float reduced_speed = 3.0f;
     [SerializeField] float duration_fall_damage = 1.0f;
-    
+    [SerializeField] bool shiled_flag = false;
+
     void onFall()
     {
+        Debug.Log("damaged");
         transform.GetComponent<life_system>().Reduce_life_points(points_on_fall);
         StartCoroutine(onFall_ie());
     }
@@ -27,12 +29,22 @@ public class Player_damage_system : MonoBehaviour
     {
         // Impulse = F * DeltaT = m * a * DeltaT = m * DeltaV
         float impulse = collision.relativeVelocity.magnitude * rb.mass;
-        if (impulse > minImpulseForfallDamage)
+        if (impulse > minImpulseForfallDamage && !shiled_flag)
         {
             onFall();
         }
     }
 
+    public void shilded(float duation)
+    {
+        StartCoroutine(enumerator(duation));
+    }
+    IEnumerator enumerator(float duation)
+    {
+        shiled_flag = true;
+        yield return new WaitForSeconds(duation);
+        shiled_flag = false;
+    }
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -43,6 +55,6 @@ public class Player_damage_system : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

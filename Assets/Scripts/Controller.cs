@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private Vector3 startingPosition;
     public float minimumImpulseForce = 5f;
 
+    [SerializeField] GameObject scean_manager;
     public float slidingSpeed = 2f;
     private bool isSliding = false;
     private Rigidbody2D heroRigidbody;
@@ -37,7 +38,7 @@ public class Controller : MonoBehaviour
     private void OnEnable()
     {
         move_left.Enable();
-        move_right.Enable();    
+        move_right.Enable();
         jump.Enable();
     }
 
@@ -94,7 +95,7 @@ public class Controller : MonoBehaviour
                 isSliding = false;
             }
         }
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -128,6 +129,19 @@ public class Controller : MonoBehaviour
     {
         return this.SideSpeed;
     }
+    /**
+     * set new impulse
+     */
+    public void set_impulse(float im)
+    {
+        this.JumpImpulse = im;
+    }
+    public float get_impulse()
+    {
+        return this.JumpImpulse;
+    }
+
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -150,9 +164,15 @@ public class Controller : MonoBehaviour
             }
             else // Touching the enemy on the x-axis
             {
-                transform.position = startingPosition;
+                //transform.position = startingPosition;
+                GetComponent<life_system>().Reduce_life_points(10);
             }
             return;
         }
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            scean_manager.GetComponent<Screen_manager>().load_win_screen();
+        }
+
     }
 }
