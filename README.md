@@ -1,7 +1,7 @@
 # Matthews-journey
 
 Game for H.W 5, based on the Mario game.
-[https://elonnyosef.itch.io/matthews-journey](https://elonnyosef.itch.io/matthews-journey)
+[https://elonnyosef.itch.io/mariogame](https://elonnyosef.itch.io/mariogame)
 
 In our 2D game, we created a hero character, Mario, and an enemy that moves side
 to side. We implemented the hero's movement, including walking and jumping,
