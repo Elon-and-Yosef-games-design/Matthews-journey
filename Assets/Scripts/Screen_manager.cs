@@ -19,6 +19,21 @@ public class Screen_manager : MonoBehaviour
     static int last_level = 0;
 
 
+    public static Screen_manager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void move_to_main()
     {
         DontDestroyOnLoad(this);
@@ -44,6 +59,19 @@ public class Screen_manager : MonoBehaviour
     {
         last_level++;
         if (last_level < levels.Length)
+        {
+            //DontDestroyOnLoad(this);
+            SceneManager.LoadScene(levels[last_level]);
+        }
+        else
+        {
+            move_to_main();
+        }
+    }
+    public void previous_level()
+    {
+        last_level--;
+        if (last_level >= 0)
         {
             //DontDestroyOnLoad(this);
             SceneManager.LoadScene(levels[last_level]);

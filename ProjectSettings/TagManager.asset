@@ -8,6 +8,7 @@ TagManager:
   - feet
   - Pillar
   - PillarEnd
+  - Death
   layers:
   - Default
   - TransparentFX

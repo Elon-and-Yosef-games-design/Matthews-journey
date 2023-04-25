@@ -38,6 +38,7 @@ public class life_system : MonoBehaviour
         if (life_points <= 0)
         {
             transform.position = startingPosition;
+            Screen_manager.Instance.previous_level();
             Debug.Log("die");
         }
 

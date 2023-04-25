@@ -108,6 +108,14 @@ public class Controller : MonoBehaviour
         {
             isSliding = false;
         }
+        else if (collider.gameObject.CompareTag("Finish"))
+        {
+            Screen_manager.Instance.next_level();
+        }
+        else if (collider.gameObject.CompareTag("Death"))
+        {
+            Screen_manager.Instance.load_lose_screen();
+        }
     }
 
     void OnTriggerExit2D(Collider2D collider)

@@ -3,11 +3,11 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField]
-    public float speed = 2f;
+    public float speed;
     [SerializeField]
-    public float startPoint = 0f;
+    public float startPoint;
     [SerializeField]
-    public float endPoint = 10f;
+    public float endPoint;
     [SerializeField]
     private Vector3 targetPosition;
     private bool moveRight = true;
